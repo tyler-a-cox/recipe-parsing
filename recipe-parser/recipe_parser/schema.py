@@ -7,47 +7,85 @@ SYNTAXES = ["json-ld"]
 
 
 class Schema:
-    def __init__(self):
+    def __init__(self, url: str):
         """
         """
         pass
 
-    def title(self):
+    @property
+    def title(self) -> str:
         """
         """
         pass
 
-    def cookTime(self):
+    @property
+    def author(self) -> str:
         """
         """
         pass
 
-    def recipeIngredient(self):
+    @property
+    def time(self) -> float:
         """
         """
         pass
 
-    def recipeCuisine(self):
+    @property
+    def yields(self) -> float:
         """
         """
         pass
 
-    def nutrition(self):
+    @property
+    def instructions(self) -> float:
         """
         """
         pass
 
-    def ingredients(self):
+    @property
+    def ratings(self) -> float:
         """
         """
         pass
 
-    def title(self):
+    @property
+    def reviews(self) -> list:
         """
         """
         pass
 
-    def image(self):
+    @property
+    def cuisine(self) -> str:
+        """
+        """
+        pass
+
+    @property
+    def nutrition(self) -> dict:
+        """
+        """
+        pass
+
+    @property
+    def ingredients(self) -> list:
+        """
+        """
+        pass
+
+    @property
+    def image(self) -> str:
+        """
+        """
+        pass
+
+    @property
+    def description(self) -> str:
+        """
+        """
+        pass
+
+    @property
+    def url(self) -> str:
         """
         """
         pass

@@ -10,9 +10,11 @@ class IngredientException(Exception):
         """
         return "Ingredient Exception: {}".format(self.message)
 
+
 class IngredientNotFoundException(IngredientException):
     def __init__(self, line):
         super().__init__(message)
+
 
 class LowConfidenceException(IngredientException):
     def __init__(self, line, confidence):

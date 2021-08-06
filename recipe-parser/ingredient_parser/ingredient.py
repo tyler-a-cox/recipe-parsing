@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class Ingredient:
     product: str
@@ -7,4 +8,3 @@ class Ingredient:
     unit: str
     notes: str
     confidence: float
-    

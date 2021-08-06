@@ -10,12 +10,14 @@ class ScraperException(Exception):
         """
         return "Scrapers exception: {}".format(self.message)
 
+
 class WebsiteNotImplementedError(ScraperException):
     def __init__(self, domain):
         """
         """
         message = "Website {} not supported".format(domain)
         super().__init__(message)
+
 
 class NoSchemaFound(ScraperException):
     def __init__(self, url):
