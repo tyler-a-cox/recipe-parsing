@@ -1,1 +1,3 @@
 # Recipe Scraper
+
+## Recipe Schema
