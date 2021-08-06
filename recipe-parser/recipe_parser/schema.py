@@ -1,3 +1,11 @@
+import extruct
+import requests
+
+SCHEMA_HOST = "schema.org"
+SCHEMA_NAMES = ["Recipe", "WebPage"]
+SYNTAXES = ["json-ld"]
+
+
 class Schema:
     def __init__(self):
         """
@@ -39,7 +47,7 @@ class Schema:
         """
         pass
 
-    def ingredients(self):
+    def image(self):
         """
         """
         pass
