@@ -1,6 +1,14 @@
 import re
 
 
+def cleanhtml(raw_html: str) -> str:
+    """
+    """
+    cleanr = re.compile("<.*?>")
+    cleantext = re.sub(cleanr, "", raw_html)
+    return cleantext
+
+
 def stardardize_input(string: str) -> str:
     """Use regex to normalize string to standard input to make parsing simple
     """

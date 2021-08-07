@@ -6,4 +6,4 @@ class Ingredient:
     product: str
     quantity: float
     unit: str
-    input: str
+    line: str

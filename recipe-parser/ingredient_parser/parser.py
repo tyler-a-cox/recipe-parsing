@@ -15,3 +15,9 @@ class IngredientParser:
         """
         line = stardardize_input(line)
         doc = nlp(line)
+
+        product = ...
+        quantity = ...
+        unit = ...
+
+        return Ingredient(product=product, quantity=quantity, unit=unit, line=line)
