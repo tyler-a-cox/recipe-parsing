@@ -6,5 +6,4 @@ class Ingredient:
     product: str
     quantity: float
     unit: str
-    notes: str
-    confidence: float
+    input: str

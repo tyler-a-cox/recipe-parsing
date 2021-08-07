@@ -25,3 +25,11 @@ class NoSchemaFound(ScraperException):
         """
         message = "No recipe schema found at {}".format(url)
         super().__init__(message)
+
+
+class ElementNotFound(ScraperException):
+    def __init__(self, element):
+        """
+        """
+        message = "Element {} not found in schema".format(url)
+        super().__init__(message)

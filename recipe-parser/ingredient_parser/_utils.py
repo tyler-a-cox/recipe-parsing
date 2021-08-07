@@ -1,6 +1,19 @@
 import re
 
 
+def stardardize_input(string: str) -> str:
+    """Use regex to normalize string to standard input to make parsing simple
+    """
+    pass
+
+
+def flatten_docs(docs: list) -> list:
+    """
+    """
+    pass
+
+
+# String Methods
 def decimal_to_string(decimal):
     """
     """
