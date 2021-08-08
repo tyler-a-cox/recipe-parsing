@@ -1,8 +1,9 @@
 import extruct
 import requests
-from typing import Optional
+from typing import Optional, Union
 from ._utils import *
 from ._settings import *
+from ._exceptions import *
 
 
 class Schema:
@@ -11,6 +12,21 @@ class Schema:
         """
         self.url = url
         self.metadata = scrape(url=url, headers=headers)
+
+        metatype = self.metadata.get("@type", "")
+        graphtype = self.metadata.get("@graph", None)
+
+        if metatype.lower() == "recipe":
+            self.data = self.metadata
+
+        elif isinstance(graphtype, list):
+            for graph_item in graphtype:
+                if graph_item.get("@type", "").lower() == "recipe":
+                    self.data = graph_item
+                    return
+
+        else:
+            raise NoSchemaFound(url)
 
     def title(self) -> str:
         """
@@ -27,15 +43,26 @@ class Schema:
         """
         pass
 
-    def yields(self) -> float:
+    def yields(self) -> Union[str, list]:
         """
         """
-        pass
+        self.data.get("recipeYield", [])
 
-    def instructions(self) -> float:
+    def instructions(self) -> list:
         """
         """
-        pass
+        instructions = self.data.get("recipeInstructions", "")
+
+        if isinstance(instructions, dict):
+            text = []
+            for instruct in instructions:
+                if instruct.get("@type", "").lower() == "howtostep":
+                    text.append(instruct.get("text"))
+
+            return text
+
+        else:
+            return instructions
 
     def ratings(self) -> float:
         """
@@ -60,7 +87,7 @@ class Schema:
     def ingredients(self) -> list:
         """
         """
-        pass
+        return self.data.get("recipeIngredient", "")
 
     def image(self) -> str:
         """
