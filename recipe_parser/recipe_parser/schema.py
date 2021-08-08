@@ -1,15 +1,16 @@
 import extruct
 import requests
+from typing import Optional
 from ._utils import *
 from ._settings import *
 
 
 class Schema:
-    def __init__(self, url: str):
+    def __init__(self, url: str, headers: Optional[dict] = HEADERS):
         """
         """
         self.url = url
-        metadata = scrape(url=url)
+        self.metadata = scrape(url=url, headers=headers)
 
     def title(self) -> str:
         """
