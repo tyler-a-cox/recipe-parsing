@@ -1,16 +1,15 @@
 import extruct
 import requests
-
-SCHEMA_HOST = "schema.org"
-SCHEMA_NAMES = ["Recipe", "WebPage"]
-SYNTAXES = ["json-ld"]
+from ._utils import *
+from ._settings import *
 
 
 class Schema:
     def __init__(self, url: str):
         """
         """
-        pass
+        self.url = url
+        metadata = scrape(url=url)
 
     def title(self) -> str:
         """
@@ -68,11 +67,6 @@ class Schema:
         pass
 
     def description(self) -> str:
-        """
-        """
-        pass
-
-    def url(self) -> str:
         """
         """
         pass
