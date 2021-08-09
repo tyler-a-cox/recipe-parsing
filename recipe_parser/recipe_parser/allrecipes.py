@@ -35,7 +35,7 @@ class AllRecipes(DefaultSchema):
         """
         """
         tags = self.soup.find("ul", {"class": "instructions-section"}).find_all("p")
-        return [clean_unicode(tag.get_text()) for tag in tags]
+        return [tag.get_text() for tag in tags]
 
     def author(self):
         """
@@ -92,7 +92,7 @@ class AllRecipes(DefaultSchema):
         """
         """
         tags = self.soup.find_all("span", {"class": "ingredients-item-name"})
-        return [tag.get_text() for tag in tags]
+        return [clean_unicode(tag.get_text()) for tag in tags]
 
     def properties(self) -> dict:
         """

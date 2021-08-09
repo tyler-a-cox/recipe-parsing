@@ -6,12 +6,18 @@ from w3lib.html import get_base_url
 
 from ._settings import SYNTAXES
 
+UNITS = {
+    "(tps.|teaspoons)": "teaspoon",
+    "(tbps.|tbps|tablespoons)": "tablespoon",
+}
+
 
 def clean_unicode(string):
     """
     """
     cleaned = string.replace(u"\u2009", " ")
-    return clean_vulgar_fraction(cleaned)
+    cleaned = clean_vulgar_fraction(cleaned)
+    return cleaned.replace("⁄", "/")
 
 
 def clean_vulgar_fraction(string):
