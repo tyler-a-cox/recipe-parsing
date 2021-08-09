@@ -8,4 +8,4 @@ HEADERS = {
 
 SCHEMA_HOST = "schema.org"
 SCHEMA_NAMES = ["Recipe", "WebPage"]
-SYNTAXES = ["json-ld"]
+SYNTAXES = ["json-ld", "microdata"]

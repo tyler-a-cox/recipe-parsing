@@ -11,7 +11,7 @@ parsers = {
 }
 
 
-def scrape(url):
+def scrape_page(url):
     parsed = urlparse(url)
     parser = parsers.get(parsed.netloc, DefaultSchema)
     return parser(url).properties()
