@@ -1,9 +1,9 @@
-# Recipe Parser
+## Recipe Parser
 
-## Recipe Schema
+### Recipe Schema
 
-# Ingredient Parser
+## Ingredient Parser
 
-## Conditional Random Field
+### Conditional Random Field
 
-## Named Entity Recognition
+### Named Entity Recognition

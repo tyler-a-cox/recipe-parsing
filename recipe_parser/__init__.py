@@ -1,5 +1,4 @@
-from .recipe_parser._schema import DefaultSchema
-from .recipe_parser import scrape
-from .recipe_parser import get_metadata, clean_unicode
+from .recipes._schema import DefaultSchema
+from .recipes import scrape
 
-from .ingredient_parser import IngredientParser
+from .ingredients import IngredientParser

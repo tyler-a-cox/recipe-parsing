@@ -2,9 +2,17 @@ import os
 import spacy
 import pkg_resources
 from typing import Optional
-from .ingredient import Ingredient
 from ._utils import stardardize_input
 from pkg_resources import resource_string
+from dataclasses import dataclass
+
+
+@dataclass
+class Ingredient:
+    product: str
+    quantity: float
+    unit: str
+    line: str
 
 
 class IngredientParser:

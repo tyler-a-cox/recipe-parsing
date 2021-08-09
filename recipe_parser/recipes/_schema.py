@@ -34,6 +34,7 @@ class DefaultSchema:
                     self.data = graph_item
                     return
 
+        # I might raise an exception here
         else:
             self.data = {}
 

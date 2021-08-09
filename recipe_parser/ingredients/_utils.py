@@ -15,12 +15,6 @@ def stardardize_input(string: str) -> str:
     pass
 
 
-def flatten_docs(docs: list) -> list:
-    """
-    """
-    pass
-
-
 # String Methods
 def decimal_to_string(decimal):
     """
