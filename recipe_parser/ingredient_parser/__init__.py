@@ -1,2 +1,1 @@
-from .ingredient import *
-from .parser import *
+from .parser import IngredientParser

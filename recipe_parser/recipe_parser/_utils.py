@@ -1,9 +1,20 @@
 import re
 import extruct
 import requests
+import unicodedata
 from w3lib.html import get_base_url
 
 from ._settings import SYNTAXES
+
+
+def clean_vulgar_fraction(string):
+    cleaned = [
+        unicodedata.normalize("NFKC", char)
+        if unicodedata.name(char).startswith("VULGAR FRACTION")
+        else char
+        for char in string
+    ]
+    return "".join(cleaned)
 
 
 def cleanhtmltags(raw_html):
@@ -25,8 +36,18 @@ def get_metadata(html: bytes, url: str, uniform: bool = True) -> dict:
     """
     """
     metadata = extruct.extract(
-        html, base_url=get_base_url(url), syntaxes=SYNTAXES, uniform=uniform
-    )["json-ld"]
+        html,
+        base_url=get_base_url(url),
+        syntaxes=SYNTAXES,
+        uniform=uniform,
+        errors="log",
+    )
+
+    try:
+        metadata = metadata["json-ld"]
+
+    except KeyError:
+        return {}
 
     if bool(metadata) and isinstance(metadata, list):
         metadata = metadata[0]
