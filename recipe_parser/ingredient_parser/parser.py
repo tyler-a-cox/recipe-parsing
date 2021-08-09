@@ -1,15 +1,22 @@
+import os
 import spacy
+import pkg_resources
 from typing import Optional
 from .ingredient import Ingredient
 from ._utils import stardardize_input
+from pkg_resources import resource_string
 
 
 class IngredientParser:
-    def __init__(self, model: Optional[str] = "recipe_parser/ingredient_parser/ner"):
+    def __init__(self, model: Optional[str] = "ner"):
         """
         """
         # Try-except load this
-        self.nlp = spacy.load(model)
+        dirname = os.path.dirname(__file__)
+        stream = os.path.join(dirname, "models/ner")
+        # stream = resource_string("recipe_parser.ingredient_parser", "ner")
+        # print(stream)
+        self.nlp = spacy.load(stream)
 
     def parse(self, line: str) -> Ingredient:
         """

@@ -1,4 +1,5 @@
 import os
+import glob
 
 from setuptools import find_packages, setup
 
@@ -6,6 +7,17 @@ about = {}
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(os.path.dirname(__file__), "README.md")).read()
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+
+
+def package_files(directory):
+    paths = []
+    for (path, directories, filenames) in os.walk(directory):
+        for filename in filenames:
+            paths.append(os.path.join("..", path, filename))
+    return paths
+
+
+extra_files = package_files("recipe_parser/ingredient_parser/models/ner")
 
 setup(
     name="recipe_parser",
@@ -18,9 +30,9 @@ setup(
     long_description=README,
     long_description_content_type="text/x-rst",
     install_requires=["beautifulsoup4>=4.6.0", "extruct>=0.8.0", "requests>=2.19.1"],
-    packages=find_packages(),
-    package_data={"": ["LICENSE"]},
+    packages=["recipe_parser"],
     include_package_data=True,
+    package_data={"": extra_files},
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

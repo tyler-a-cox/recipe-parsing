@@ -4,7 +4,7 @@ from typing import Optional, Union
 
 from ._settings import HEADERS
 from ._schema import DefaultSchema
-from ._utils import clean_vulgar_fraction
+from ._utils import clean_vulgar_fraction, clean_unicode
 
 
 class SeriousEats(DefaultSchema):
@@ -29,7 +29,11 @@ class SeriousEats(DefaultSchema):
     def description(self):
         """
         """
-        return self.soup.find("h2", {"class": "heading__subtitle"}).get_text()
+        description = self.soup.find("h2", {"class": "heading__subtitle"})
+        if description:
+            return description.get_text()
+
+        return ""
 
     def instructions(self):
         """
@@ -84,7 +88,7 @@ class SeriousEats(DefaultSchema):
         """
         """
         tags = self.soup.findAll("li", {"class": "ingredient"})
-        return [clean_vulgar_fraction(tag.get_text().strip()) for tag in tags]
+        return [clean_unicode(tag.get_text().strip()) for tag in tags]
 
     def properties(self) -> dict:
         """

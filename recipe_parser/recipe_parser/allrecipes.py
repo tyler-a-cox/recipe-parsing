@@ -4,7 +4,7 @@ from typing import Optional, Union
 
 from ._settings import HEADERS
 from ._schema import DefaultSchema
-from ._utils import clean_vulgar_fraction
+from ._utils import clean_vulgar_fraction, clean_unicode
 
 
 class AllRecipes(DefaultSchema):
@@ -35,7 +35,7 @@ class AllRecipes(DefaultSchema):
         """
         """
         tags = self.soup.find("ul", {"class": "instructions-section"}).find_all("p")
-        return [clean_vulgar_fraction(tag.get_text()) for tag in tags]
+        return [clean_unicode(tag.get_text()) for tag in tags]
 
     def author(self):
         """
