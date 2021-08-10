@@ -34,16 +34,13 @@ class DefaultSchema:
 
             if metatype.lower() == "recipe":
                 self.data = meta
+                return
 
             elif isinstance(graphtype, list):
                 for graph_item in graphtype:
                     if graph_item.get("@type", "").lower() == "recipe":
                         self.data = graph_item
                         return
-
-            # I might raise an exception here
-            else:
-                self.data = {}
 
     def title(self) -> str:
         """
@@ -81,9 +78,13 @@ class DefaultSchema:
 
         if isinstance(instructions, list):
             text = []
-            for instruct in instructions:
-                if instruct.get("@type", "").lower() == "howtostep":
-                    text.append(instruct.get("text"))
+            if isinstance(instructions[0], dict):
+                for instruct in instructions:
+                    if instruct.get("@type", "").lower() == "howtostep":
+                        text.append(instruct.get("text"))
+
+            elif isinstance(instructions[0], str):
+                text = instructions
 
             return text
 
