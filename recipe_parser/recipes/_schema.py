@@ -51,10 +51,15 @@ class DefaultSchema:
         """
         """
         author = self.data.get("author", "")
-        if isinstance(author, dict):
+        if author and isinstance(author, dict):
             return author.get("name", "")
 
-        if isinstance(author, list) and isinstance(author[0], dict):
+        if (
+            author
+            and isinstance(author, list)
+            and len(author) >= 1
+            and isinstance(author[0], dict)
+        ):
             return author[0].get("name", "")
 
         return author
@@ -62,14 +67,24 @@ class DefaultSchema:
     def time(self) -> float:
         """
         """
-        a = self.data.get("totalTime", "")
-        # normalize text
-        return a
+        if not (self.data.keys() & {"totalTime", "prepTime", "cookTime"}):
+            return float("NaN")
+
+        def _get_key_and_minutes(k):
+            return get_minutes(self.data.get(k), return_zero_on_not_found=True)
+
+        time = _get_key_and_minutes("totalTime")
+        if not time:
+            times = list(map(_get_key_and_minutes, ["prepTime", "cookTime"]))
+            time = times(sum)
+        # normalize text in utils
+        return time
 
     def yields(self) -> Union[str, list]:
         """
         """
-        return self.data.get("recipeYield", [])
+        yields = self.data.get("recipeYield", [])
+        return yields
 
     def instructions(self) -> list:
         """
@@ -94,7 +109,17 @@ class DefaultSchema:
     def ratings(self) -> float:
         """
         """
-        return self.data.get("aggregateRating", {}).get("ratingValue", "")
+        ratings = self.data.get("aggregateRating", {})
+        if len(ratings) == 0:
+            return float("NaN")
+
+        if isinstance(ratings, dict):
+            ratings = ratings.get("ratingValue")
+
+        if ratings is None:
+            return float("NaN")
+
+        return round(float(ratings), 2)
 
     def reviews(self) -> list:
         """
@@ -109,29 +134,49 @@ class DefaultSchema:
     def cuisine(self) -> str:
         """
         """
-        return self.data.get("recipeCuisine", "")
+        cuisine = self.data.get("recipeCuisine", "")
+        if isinstance(cuisine, list):
+            return ",".join(cuisine)
 
-    def nutrition(self, query: bool = False) -> dict:
+        return cuisine
+
+    def nutrition(self, query: bool = True) -> dict:
         """
         """
         nutrition = self.data.get("nutrition", {})
+
+        # Might use api to search this if information if it doesn't exist
         if len(nutrition) == 0 and query:
             return {}
+
+        for key, value in nutrition.copy().items():
+            if value is None:
+                del nutrition[key]
+
+            elif type(value) in [int, float]:
+                nutrition[key] = str(value)
 
         return nutrition
 
     def ingredients(self) -> list:
         """
         """
-        ingredients = self.data.get("recipeIngredient", "")
+        ingredients = self.data.get("recipeIngredient", [])
+        if len(ingredients) > 0:
+            return [clean_vulgar_fraction(ingredient) for ingredient in ingredients]
+
+        ingredients = self.data.get("ingredients", [])
         return [clean_vulgar_fraction(ingredient) for ingredient in ingredients]
 
-    def image(self) -> Union[str, list]:
+    def image(self) -> str:
         """
         """
-        image = self.data.get("image", [])
+        image = self.data.get("image", "")
         if isinstance(image, dict):
             return image.get("url", "")
+
+        if isinstance(image, list) and len(list) >= 1:
+            return image[0]
 
         return image
 
@@ -145,7 +190,7 @@ class DefaultSchema:
         """
         return self.data.get("keywords", "")
 
-    def properties(self) -> dict:
+    def get_all(self) -> dict:
         """
         """
         values = {}

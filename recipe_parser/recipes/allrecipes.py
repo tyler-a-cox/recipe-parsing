@@ -11,6 +11,10 @@ class AllRecipes(DefaultSchema):
     """
     """
 
+    @classmethod
+    def host(cls):
+        return "allrecipes.com"
+
     def __init__(self, url: str, headers: Optional[dict] = HEADERS):
         """
         url : str

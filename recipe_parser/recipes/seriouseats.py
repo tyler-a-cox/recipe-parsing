@@ -11,12 +11,12 @@ class SeriousEats(DefaultSchema):
     """
     """
 
+    @classmethod
+    def host(cls):
+        return "seriouseats.com"
+
     def __init__(self, url: str, headers: Optional[dict] = HEADERS):
         """
-        url : str
-            url
-        headers : dict, Optional
-            dict
         """
         super().__init__(url)
         self.soup = BeautifulSoup(self.page, "html.parser")
