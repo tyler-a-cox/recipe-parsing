@@ -29,7 +29,7 @@ setup(
     keywords="python recipes scraper harvest recipe-scraper recipe-scrapers",
     long_description=README,
     long_description_content_type="text/x-rst",
-    install_requires=["beautifulsoup4>=4.6.0", "extruct>=0.8.0", "requests>=2.19.1"],
+    install_requires=["beautifulsoup4", "extruct", "requests", "spacy"],
     packages=["recipe_parser"],
     include_package_data=True,
     package_data={"": extra_files},
