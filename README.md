@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.com/tyler-a-cox/recipe-parsing.svg?branch=main)](https://travis-ci.com/tyler-a-cox/recipe-parsing)
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![Code Style Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 # Recipe Parser
 A python package for scraping recipes from cooking websites and parsing the output.
 
