@@ -56,12 +56,6 @@ def get_metadata(html: bytes, url: str, uniform: bool = True) -> dict:
         errors="log",
     )
 
-    try:
-        metadata = metadata["json-ld"]
-
-    except KeyError:
-        return {}
-
     if bool(metadata) and isinstance(metadata, list):
         metadata = metadata[0]
 

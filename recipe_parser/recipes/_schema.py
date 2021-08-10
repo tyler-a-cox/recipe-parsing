@@ -21,22 +21,29 @@ class DefaultSchema:
         self.url = url
         self.page = get_html(url)
         self.metadata = scrape(url=url, headers=headers)
+        for syntax in SYNTAXES:
+            meta = self.metadata.get(syntax, {})
+            if len(meta) > 0:
+                meta = meta[0]
 
-        metatype = self.metadata.get("@type", "")
-        graphtype = self.metadata.get("@graph", None)
+            else:
+                continue
 
-        if metatype.lower() == "recipe":
-            self.data = self.metadata
+            metatype = meta.get("@type", "")
+            graphtype = meta.get("@graph", None)
 
-        elif isinstance(graphtype, list):
-            for graph_item in graphtype:
-                if graph_item.get("@type", "").lower() == "recipe":
-                    self.data = graph_item
-                    return
+            if metatype.lower() == "recipe":
+                self.data = meta
 
-        # I might raise an exception here
-        else:
-            self.data = {}
+            elif isinstance(graphtype, list):
+                for graph_item in graphtype:
+                    if graph_item.get("@type", "").lower() == "recipe":
+                        self.data = graph_item
+                        return
+
+            # I might raise an exception here
+            else:
+                self.data = {}
 
     def title(self) -> str:
         """
