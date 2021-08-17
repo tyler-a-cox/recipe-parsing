@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 
-from ._abstract import DefaultSchema
+from ._schema import DefaultSchema
 
 
 class BBCGoodFood(DefaultSchema):

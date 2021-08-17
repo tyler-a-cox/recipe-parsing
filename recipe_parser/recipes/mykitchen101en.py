@@ -2,7 +2,7 @@ import re
 
 from bs4 import BeautifulSoup
 
-from ._abstract import DefaultSchema
+from ._schema import DefaultSchema
 from ._utils import get_yields, normalize_string
 
 

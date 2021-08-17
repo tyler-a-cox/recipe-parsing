@@ -1,4 +1,4 @@
-from ._abstract import DefaultSchema
+from ._schema import DefaultSchema
 from ._utils import get_minutes, get_yields, normalize_string
 
 

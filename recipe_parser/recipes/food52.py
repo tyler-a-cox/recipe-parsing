@@ -1,4 +1,4 @@
-from recipe_scrapers._abstract import DefaultSchema
+from recipe_scrapers._schema import DefaultSchema
 from recipe_scrapers._utils import get_minutes, normalize_string
 
 

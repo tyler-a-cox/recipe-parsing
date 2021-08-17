@@ -2,7 +2,7 @@ import re
 
 from bs4 import Tag
 
-from ._abstract import DefaultSchema
+from ._schema import DefaultSchema
 from ._utils import normalize_string
 
 """

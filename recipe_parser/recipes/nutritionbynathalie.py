@@ -1,6 +1,6 @@
 import re
 
-from ._abstract import DefaultSchema
+from ._schema import DefaultSchema
 
 BULLET_CHARACTER_ORD = 8226
 

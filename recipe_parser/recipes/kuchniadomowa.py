@@ -1,4 +1,4 @@
-from ._abstract import DefaultSchema
+from ._schema import DefaultSchema
 
 
 class KuchniaDomowa(DefaultSchema):
