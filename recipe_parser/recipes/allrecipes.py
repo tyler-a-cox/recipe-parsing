@@ -97,13 +97,3 @@ class AllRecipes(DefaultSchema):
         """
         tags = self.soup.find_all("span", {"class": "ingredients-item-name"})
         return [clean_unicode(tag.get_text()) for tag in tags]
-
-    def properties(self) -> dict:
-        """
-        """
-        values = {}
-        for method, f in inspect.getmembers(self, predicate=inspect.ismethod):
-            if method != "properties" and not method.startswith("_"):
-                values[method] = f()
-
-        return values

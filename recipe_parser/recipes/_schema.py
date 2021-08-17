@@ -42,6 +42,8 @@ class DefaultSchema:
                         self.data = graph_item
                         return
 
+        self.data = {}
+
     def title(self) -> str:
         """
         """
@@ -195,7 +197,7 @@ class DefaultSchema:
         """
         values = {}
         for method, f in inspect.getmembers(self, predicate=inspect.ismethod):
-            if method != "properties" and not method.startswith("_"):
+            if method != "get_all" and not method.startswith("_"):
                 values[method] = f()
 
         return values

@@ -3,7 +3,6 @@ from urllib.parse import urlparse
 from ._schema import DefaultSchema
 from ._utils import get_metadata, clean_unicode
 
-
 from .seriouseats import SeriousEats
 from .allrecipes import AllRecipes
 
